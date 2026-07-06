@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stored user profile data when a patient signs up",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Booking": {
+      "title": "Appointment Booking",
+      "description": "Secure record of an appointment booking made by a patient",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "patientName": { "type": "string" },
+        "patientEmail": { "type": "string", "format": "email" },
+        "patientPhone": { "type": "string" },
+        "patientAge": { "type": "string" },
+        "patientGender": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "departmentName": { "type": "string" },
+        "doctorId": { "type": "string" },
+        "doctorName": { "type": "string" },
+        "date": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "reason": { "type": "string" },
+        "insuranceProvider": { "type": "string" },
+        "status": { "type": "string", "enum": ["Confirmed", "Cancelled"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": [
+        "id",
+        "userId",
+        "patientName",
+        "patientEmail",
+        "patientPhone",
+        "patientAge",
+        "patientGender",
+        "departmentId",
+        "departmentName",
+        "doctorId",
+        "doctorName",
+        "date",
+        "timeSlot",
+        "reason",
+        "status",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile document indexed by their authenticated Firebase Auth UID"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Appointment booking document indexed by a unique reservation identifier"
+    }
+  }
+}
